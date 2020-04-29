@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Configure apt and install packages
 RUN apt-get update \
     #
-    # Install C++ tools
+    # Install C++ tools and gRPC requirements
     && apt-get install -yq git make g++ cmake \
                            qtbase5-dev \
                            autoconf libtool pkg-config golang \
@@ -34,4 +34,4 @@ RUN git clone --depth 1 --recurse-submodules -b $GRPC_VERSION https://github.com
         -DCMAKE_INSTALL_PREFIX=$GRPC_INSTALL_DIR \
         -DBUILD_SHARED_LIBS=$GRPC_BUILD_SHARED_LIBS \
     && make -j$(nproc) && make install && ldconfig \
-    && cd .. && rm -rf grpc
+    && cd ../../.. && rm -rf grpc
