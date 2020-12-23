@@ -7,7 +7,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     #
     # Install C++ tools and gRPC requirements
-    && apt-get install -yq git make g++ cmake \
+    && apt-get install -yq git make g++ cmake ninja-build \
                            qtbase5-dev libssl-dev \
                            autoconf libtool pkg-config golang \
     #
@@ -29,10 +29,11 @@ RUN git clone --depth 1 --recurse-submodules -j 4 -b $GRPC_VERSION https://githu
     && cd grpc \
     && mkdir -p cmake/build && cd cmake/build \
     && cmake ../.. \
+        -GNinja \
         -DgRPC_INSTALL=ON \
         -DgRPC_BUILD_TESTS=OFF \
         -DgRPC_SSL_PROVIDER=package \
         -DCMAKE_INSTALL_PREFIX=$GRPC_INSTALL_DIR \
         -DBUILD_SHARED_LIBS=$GRPC_BUILD_SHARED_LIBS \
-    && make -j$(nproc) && make install && ldconfig \
+    && cmake --build . && cmake --install . && ldconfig \
     && cd ../../.. && rm -rf grpc
