@@ -8,8 +8,7 @@ RUN apt-get update \
     #
     # Install C++ tools and gRPC requirements
     && apt-get install -yq git make g++ cmake ninja-build \
-                           qtbase5-dev libssl-dev \
-                           autoconf libtool pkg-config golang \
+                           libssl-dev autoconf libtool pkg-config golang \
     #
     # Clean up
     && apt-get autoremove -y \
