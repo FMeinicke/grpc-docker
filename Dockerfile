@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.04 AS builder
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -35,5 +35,8 @@ RUN git clone --depth 1 --recurse-submodules -j 4 -b $GRPC_VERSION https://githu
         -DgRPC_SSL_PROVIDER=package \
         -DCMAKE_INSTALL_PREFIX=$GRPC_INSTALL_DIR \
         -DBUILD_SHARED_LIBS=$GRPC_BUILD_SHARED_LIBS \
-    && cmake --build . && cmake --install . && ldconfig \
-    && cd ../../.. && rm -rf grpc
+    && cmake --build . && cmake --install .
+
+FROM ubuntu:20.04
+COPY --from=builder /usr/local /usr/local
+RUN ldconfig
