@@ -26,7 +26,7 @@ ARG GRPC_VERSION=master
 # specify GRPC_SSL_PROVIDER on the command line using docker build --build-arg
 ARG GRPC_SSL_PROVIDER=package
 # specify GRPC_BUILD_SHARED_LIBS on the command line using docker build --build-arg
-ARG GRPC_BUILD_SHARED_LIBS=ON
+ARG GRPC_BUILD_SHARED_LIBS=OFF
 RUN git clone --depth 1 --recurse-submodules -j 4 -b ${GRPC_VERSION} https://github.com/grpc/grpc \
     && cd grpc \
     && mkdir -p cmake/build && cd cmake/build \
