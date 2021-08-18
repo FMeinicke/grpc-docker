@@ -21,7 +21,7 @@ ENV DEBIAN_FRONTEND=dialog
 # Get & build gRPC
 # see https://grpc.io/docs/quickstart/cpp/ for more info
 ENV GRPC_INSTALL_DIR=/usr/local
-ENV GRPC_VERSION=v1.31.0
+ENV GRPC_VERSION=v1.39.1
 # specify GRPC_BUILD_SHARED_LIBS on the command line using docker build --build-arg
 ARG GRPC_BUILD_SHARED_LIBS=ON
 RUN git clone --depth 1 --recurse-submodules -j 4 -b $GRPC_VERSION https://github.com/grpc/grpc \
