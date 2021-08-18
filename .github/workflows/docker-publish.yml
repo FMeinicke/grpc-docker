@@ -33,6 +33,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      
+      # Convert repo owner to lowercase as docker registry requires lower case names
+      # https://github.com/LucasRoesler/get-repo-owner-action
+      - name: Get Repo Owner
+        id: get_owner
+        uses: LucasRoesler/get-repo-owner-action@v1.0
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
@@ -41,7 +47,7 @@ jobs:
         uses: docker/login-action@v1.10.0
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ github.actor }}
+          username: ${{ steps.get_owner.outputs.owner }}
           password: ${{ secrets.DOCKER_REGISTRY_TOKEN }}
 
       # Extract metadata (tags, labels) for Docker
