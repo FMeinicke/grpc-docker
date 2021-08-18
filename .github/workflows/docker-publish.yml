@@ -33,7 +33,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-      
+
       # Convert actor to lowercase as docker registry requires lower case names
       # https://github.community/t/additional-function-s-lowercase-uppercase/140632/2
       - name: Transform actor to lower case
@@ -68,3 +68,6 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            GRPC_VERSION=v1.39.1
+            GRPC_BUILD_SHARED_LIBS=ON
