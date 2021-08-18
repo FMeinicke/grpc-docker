@@ -30,6 +30,7 @@ RUN git clone --depth 1 --recurse-submodules -j 4 -b $GRPC_VERSION https://githu
     && cmake ../.. \
         -GNinja \
         -DgRPC_INSTALL=ON \
+        -DABSL_ENABLE_INSTALL=ON \
         -DgRPC_BUILD_TESTS=OFF \
         -DgRPC_SSL_PROVIDER=package \
         -DCMAKE_INSTALL_PREFIX=$GRPC_INSTALL_DIR \
