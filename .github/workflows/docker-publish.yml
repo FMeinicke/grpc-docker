@@ -10,7 +10,7 @@ on:
     # run monthly to have an up to date image on Docker Hub
     - cron: '0 0 1 * *'
   push:
-    branches: [ master ]
+    branches: [ master, develop ]
     # Publish semver tags as releases.
     tags: [ 'v*.*.*' ]
   pull_request:
