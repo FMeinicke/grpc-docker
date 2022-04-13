@@ -6,8 +6,9 @@ name: Docker
 # documentation.
 
 on:
-#  schedule:
-#    - cron: '39 6 * * *'
+ schedule:
+    # run monthly to have an up to date image on Docker Hub
+    - cron: '0 0 1 * *'
   push:
     branches: [ master ]
     # Publish semver tags as releases.
