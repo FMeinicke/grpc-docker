@@ -57,7 +57,12 @@ jobs:
         id: meta
         uses: docker/metadata-action@v3.4.1
         with:
-          flavor: latest=true
+          # flavor: latest=true
+          tags: |
+            type=semver,pattern={{version}}
+            type=ref,event=branch
+            type=ref,event=tag
+            type=ref,event=pr
           images: ${{ env.IMAGE_NAME }}
 
       # Build and push Docker image with Buildx (don't push on PR)
