@@ -75,5 +75,5 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           build-args: |
-            GRPC_VERSION=v1.39.1
+            GRPC_VERSION=v1.45.2
             GRPC_BUILD_SHARED_LIBS=ON
