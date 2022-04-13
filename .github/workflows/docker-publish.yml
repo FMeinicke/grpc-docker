@@ -6,7 +6,7 @@ name: Docker
 # documentation.
 
 on:
- schedule:
+  schedule:
     # run monthly to have an up to date image on Docker Hub
     - cron: '0 0 1 * *'
   push:
