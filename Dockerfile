@@ -1,4 +1,4 @@
-FROM ubuntu:21.10 AS builder
+FROM ubuntu:22.04 AS builder
 
 # Avoid warnings by switching to noninteractive
 ENV DEBIAN_FRONTEND=noninteractive
@@ -40,6 +40,6 @@ RUN git clone --depth 1 --recurse-submodules -j 4 -b ${GRPC_VERSION} https://git
         -DBUILD_SHARED_LIBS=${GRPC_BUILD_SHARED_LIBS} \
     && cmake --build . && cmake --install .
 
-FROM ubuntu:21.10
+FROM ubuntu:22.04
 COPY --from=builder /usr/local /usr/local
 RUN ldconfig
